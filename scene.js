@@ -62,13 +62,16 @@ function loadMap(){
 function loadObj(){
   if(!objLoader)
   objLoader = new THREE.OBJLoader();
-  objLoader.load('./obj/cat/12222_Cat_v1_l3.obj',objectLoaded,objectLoadProgress,objectLoadError);
+  objLoader.load('../models/cerberus/Cerberus.obj',objectLoaded,objectLoadProgress,objectLoadError);
+  // objLoader.load('./obj/cat/12222_Cat_v1_l3.obj',objectLoaded,objectLoadProgress,objectLoadError);
 }
 
 objectLoaded = (object)=>{
-  let texture = new THREE.TextureLoader().load('./obj/cat/Cat_diffuse.jpg');
+  let texture = new THREE.TextureLoader().load('../models/cerberus/Cerberus_A.jpg');
+  // let texture = new THREE.TextureLoader().load('./obj/cat/Cat_diffuse.jpg');
   // let normalMap = new THREE.TextureLoader().load('./obj/cat/Cerberus_N.jpg');
-  let specularMap = new THREE.TextureLoader().load('./obj/cat/Cat_bump.jpg');
+  let specularMap = new THREE.TextureLoader().load('../models/cerberus/Cerberus_M.jpg');
+  // let specularMap = new THREE.TextureLoader().load('./obj/cat/Cat_bump.jpg');
   object.traverse(( child )=>{
       if ( child instanceof THREE.Mesh ){
           child.castShadow = true;
@@ -78,7 +81,9 @@ objectLoaded = (object)=>{
           child.material.specularMap = specularMap;
       }
   });
-  object.scale.set(0.5,0.5,0.5);
+
+  object.position.set(0,-50,0);
+  object.scale.set(15, 15, 15);
   object.rotation.z = -Math.PI/2;
   object.rotation.x =  -Math.PI/2;
 
